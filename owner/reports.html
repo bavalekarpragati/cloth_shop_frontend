@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Vogue Harbor</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/owner.css">
+</head>
+<body>
+    <nav class="owner-nav">
+        <div class="nav-brand">Vogue Harbor <span>Owner</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="products.html">Products</a>
+            <a href="sales.html">Sales</a>
+            <a href="reports.html" class="active">Reports</a>
+        </div>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-main">
+        <h1>Reports</h1>
+
+        <div class="form-panel">
+            <label>Report Type</label>
+            <select id="report-type">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly" selected>Monthly</option>
+                <option value="yearly">Yearly</option>
+                <option value="custom">Custom Range</option>
+            </select>
+
+            <div id="custom-range" class="form-row" style="display: none; margin-top: 12px;">
+                <div>
+                    <label>Start Date</label>
+                    <input type="date" id="start-date">
+                </div>
+                <div>
+                    <label>End Date</label>
+                    <input type="date" id="end-date">
+                </div>
+            </div>
+
+            <div class="form-actions" style="flex-wrap: wrap;">
+                <button id="export-csv" class="primary-btn">Download CSV</button>
+                <button id="export-excel" class="primary-btn">Download Excel</button>
+                <button id="export-pdf" class="primary-btn">Download PDF</button>
+                <button id="preview-btn" type="button">Preview Summary</button>
+            </div>
+            <div id="report-error" class="error-box" style="display: none;"></div>
+        </div>
+
+        <div id="preview-panel" class="dashboard-section" style="display: none;">
+            <h2 id="preview-title"></h2>
+            <div class="stat-cards" id="preview-stats"></div>
+            <h3>Top Selling Products</h3>
+            <div id="preview-best"></div>
+        </div>
+    </main>
+
+    <script type="module" src="../js/pages/reports.js"></script>
+</body>
+</html>

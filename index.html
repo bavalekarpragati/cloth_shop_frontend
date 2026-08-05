@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vogue Harbor - Cloth Collection</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/customer.css">
+</head>
+<body>
+    <nav class="customer-nav">
+        <div class="nav-brand">Vogue Harbor</div>
+        <div id="nav-auth"></div>
+    </nav>
+
+    <main class="catalogue-main">
+        <aside class="filters-panel">
+            <h3>Filters</h3>
+            <label>Search</label>
+            <input type="text" id="f-search" placeholder="Saree, Kurti, Jeans...">
+
+            <label>Category</label>
+            <select id="f-category">
+                <option value="">All Categories</option>
+            </select>
+
+            <label>Sort By</label>
+            <select id="f-ordering">
+                <option value="-created_at">Newest</option>
+                <option value="selling_price">Price: Low to High</option>
+                <option value="-selling_price">Price: High to Low</option>
+            </select>
+
+            <button id="apply-filters" class="primary-btn">Apply</button>
+            <button id="clear-filters">Clear All</button>
+        </aside>
+
+        <section class="product-grid-section">
+            <p id="results-count" class="muted"></p>
+            <div class="product-grid" id="product-grid">
+                <p>Loading products...</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

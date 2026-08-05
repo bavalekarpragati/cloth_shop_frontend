@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard - Vogue Harbor</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/owner.css">
+</head>
+<body>
+    <nav class="owner-nav">
+        <div class="nav-brand">Vogue Harbor <span>Owner</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="products.html">Products</a>
+            <a href="sales.html">Sales</a>
+            <a href="reports.html">Reports</a>
+        </div>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-main">
+        <h1>Dashboard</h1>
+
+        <div class="stat-cards" id="stat-cards">
+            <p>Loading...</p>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Low Stock Items</h2>
+            <div id="low-stock-list"></div>
+        </div>
+    </main>
+
+    <script type="module" src="../js/pages/dashboard.js"></script>
+</body>
+</html>

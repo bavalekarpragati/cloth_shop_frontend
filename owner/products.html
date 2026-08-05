@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products - Vogue Harbor</title>
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/owner.css">
+</head>
+<body>
+    <nav class="owner-nav">
+        <div class="nav-brand">Vogue Harbor <span>Owner</span></div>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="products.html" class="active">Products</a>
+            <a href="sales.html">Sales</a>
+            <a href="reports.html">Reports</a>
+        </div>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1>Products</h1>
+            <button id="add-product-btn" class="primary-btn">+ Add Product</button>
+        </div>
+
+        <div id="form-panel" class="form-panel" style="display: none;">
+            <h2 id="form-title">Add Product</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+
+                <label>Name</label>
+                <input type="text" id="p-name" required>
+
+                <label>Description</label>
+                <textarea id="p-description" rows="2"></textarea>
+
+                <label>Category</label>
+                <select id="p-category" required></select>
+
+                <div class="form-row">
+                    <div>
+                        <label>Base Price</label>
+                        <input type="number" step="0.01" id="p-base-price" required>
+                    </div>
+                    <div>
+                        <label>Selling Price</label>
+                        <input type="number" step="0.01" id="p-selling-price" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Stock</label>
+                        <input type="number" id="p-stock" required>
+                    </div>
+                    <div>
+                        <label>Low Stock Limit</label>
+                        <input type="number" id="p-low-stock" value="5">
+                    </div>
+                </div>
+
+                <label>Fabric</label>
+                <input type="text" id="p-fabric">
+
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Save</button>
+                    <button type="button" id="cancel-form-btn">Cancel</button>
+                </div>
+                <div id="form-error" class="error-box" style="display: none;"></div>
+            </form>
+        </div>
+
+        <table class="data-table" id="products-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Base Price</th>
+                    <th>Selling Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="products-tbody">
+                <tr><td colspan="7">Loading...</td></tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script type="module" src="../js/pages/products.js"></script>
+</body>
+</html>
