@@ -9,9 +9,17 @@
 <body>
     <div class="auth-container">
         <h1>Vogue Harbor</h1>
-        <h2>Login</h2>
+
+        <div class="role-toggle">
+            <button type="button" class="role-btn active" data-role="CUSTOMER">Customer</button>
+            <button type="button" class="role-btn" data-role="OWNER">Admin</button>
+        </div>
+
+        <h2 id="portal-label">Customer Login</h2>
 
         <form id="login-form">
+            <input type="hidden" id="selected-role" value="CUSTOMER">
+
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
 
@@ -23,7 +31,7 @@
             <button type="submit">Login</button>
         </form>
 
-        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        <p id="signup-hint">Don't have an account? <a href="signup.html">Sign up</a></p>
     </div>
 
     <script type="module" src="js/pages/login.js"></script>

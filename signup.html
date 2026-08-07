@@ -9,9 +9,17 @@
 <body>
     <div class="auth-container">
         <h1>Vogue Harbor</h1>
-        <h2>Create an Account</h2>
+
+        <div class="role-toggle">
+            <button type="button" class="role-btn active" data-role="CUSTOMER">Customer</button>
+            <button type="button" class="role-btn" data-role="OWNER">Admin</button>
+        </div>
+
+        <h2 id="portal-label">Create Customer Account</h2>
 
         <form id="signup-form">
+            <input type="hidden" id="selected-role" value="CUSTOMER">
+
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
 
