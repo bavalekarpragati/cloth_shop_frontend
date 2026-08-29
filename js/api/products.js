@@ -33,4 +33,29 @@ async function getColors() {
     return await apiRequest('/colors/');
 }
 
-export { getProducts, getProduct, createProduct, updateProduct, deleteProduct, getCategories, getSizes, getColors };
+async function uploadProductImages(id, formData) {
+    return await apiRequest(`/products/${id}/upload_images/`, {
+        method: 'POST',
+        body: formData,
+        isFormData: true
+    });
+}
+
+async function deleteProductImage(productId, imageId) {
+    return await apiRequest(`/products/${productId}/delete_image/${imageId}/`, {
+        method: 'DELETE'
+    });
+}
+
+export {
+    getProducts,
+    getProduct,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getCategories,
+    getSizes,
+    getColors,
+    uploadProductImages,
+    deleteProductImage
+};

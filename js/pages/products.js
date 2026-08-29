@@ -1,4 +1,4 @@
-import { getProducts, createProduct, updateProduct, deleteProduct, getCategories } from '../api/products.js';
+import { getProducts, createProduct, updateProduct, deleteProduct, getCategories, uploadProductImages, deleteProductImage } from '../api/products.js';
 import { logout } from '../api/auth.js';
 import { formatCurrency, requireOwner } from '../utils/dom.js';
 
@@ -75,10 +75,49 @@ async function loadProducts() {
     }
 }
 
+function renderImagesPreview(product) {
+    const previewDiv = document.getElementById('p-images-preview');
+    if (!product || !product.images || product.images.length === 0) {
+        previewDiv.innerHTML = '<p class="muted">No images uploaded yet.</p>';
+        return;
+    }
+
+    previewDiv.innerHTML = product.images.map(img => `
+        <div class="image-preview-item" data-img-id="${img.id}" style="position: relative; display: inline-block;">
+            <img src="${img.image}" alt="Product Image" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px; border: 1px solid #ddd;">
+            <button type="button" class="img-delete-btn" data-img-id="${img.id}" style="position: absolute; top: -5px; right: -5px; background: #d64545; color: white; border: none; border-radius: 50%; width: 18px; height: 18px; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&times;</button>
+        </div>
+    `).join('');
+
+    previewDiv.style.display = 'flex';
+    previewDiv.style.gap = '10px';
+    previewDiv.style.flexWrap = 'wrap';
+    previewDiv.style.margin = '10px 0';
+
+    previewDiv.querySelectorAll('.img-delete-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const imgId = btn.dataset.imgId;
+            if (confirm('Delete this image?')) {
+                try {
+                    await deleteProductImage(product.id, imgId);
+                    product.images = product.images.filter(i => i.id != imgId);
+                    renderImagesPreview(product);
+                    loadProducts();
+                } catch (err) {
+                    alert('Failed to delete image: ' + err.message);
+                }
+            }
+        });
+    });
+}
+
 function openAddForm() {
     formTitle.textContent = 'Add Product';
     productForm.reset();
     document.getElementById('product-id').value = '';
+    document.getElementById('p-images').value = '';
+    document.getElementById('p-images-preview').innerHTML = '';
     formError.style.display = 'none';
     formPanel.style.display = 'block';
 }
@@ -94,6 +133,8 @@ function openEditForm(product) {
     document.getElementById('p-stock').value = product.stock;
     document.getElementById('p-low-stock').value = product.low_stock_limit;
     document.getElementById('p-fabric').value = product.fabric || '';
+    document.getElementById('p-images').value = '';
+    renderImagesPreview(product);
     formError.style.display = 'none';
     formPanel.style.display = 'block';
 }
@@ -130,11 +171,22 @@ productForm.addEventListener('submit', async (e) => {
     };
 
     try {
+        let resultProduct;
         if (id) {
-            await updateProduct(id, payload);
+            resultProduct = await updateProduct(id, payload);
         } else {
-            await createProduct(payload);
+            resultProduct = await createProduct(payload);
         }
+
+        const fileInput = document.getElementById('p-images');
+        if (fileInput.files.length > 0) {
+            const formData = new FormData();
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append('images', fileInput.files[i]);
+            }
+            await uploadProductImages(resultProduct.id, formData);
+        }
+
         formPanel.style.display = 'none';
         loadProducts();
     } catch (err) {
