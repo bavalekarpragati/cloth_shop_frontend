@@ -1,6 +1,7 @@
 import { getAnalytics } from '../api/analytics.js';
 import { logout } from '../api/auth.js';
 import { formatCurrency, requireOwner } from '../utils/dom.js';
+import { initOwnerNotifications } from '../utils/notifications.js';
 
 if (!requireOwner()) {
     throw new Error('Redirecting - not authorized');
@@ -64,5 +65,5 @@ async function loadDashboard() {
         statCards.innerHTML = `<p class="error-box">Failed to load dashboard: ${err.message}</p>`;
     }
 }
-
+initOwnerNotifications();    
 loadDashboard();

@@ -430,3 +430,6 @@
     background: var(--primary-hover);
     box-shadow: 0 4px 12px rgba(106, 79, 212, 0.2);
 }
+.cart-actions { margin-top: 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.cart-actions input { width: 70px; padding: 8px; }
+.cart-success { color: #2e7d32; }

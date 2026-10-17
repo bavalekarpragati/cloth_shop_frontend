@@ -1,4 +1,5 @@
 import { getProduct } from '../api/products.js';
+import { addToCart } from '../api/cart.js'; 
 import { logout } from '../api/auth.js';
 import { formatCurrency } from '../utils/dom.js';
 import { getUsername, getRole } from '../api/client.js';
@@ -23,6 +24,37 @@ function renderNav() {
 function getProductIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
+}
+
+
+// NEW: wires up the Add to Cart button after it exists on the page
+function setupAddToCart(product) {
+    const btn = document.getElementById('add-to-cart-btn');
+    const msg = document.getElementById('cart-message');
+    if (!btn) return;
+
+    btn.addEventListener('click', async () => {
+        // Must be logged in
+        if (!localStorage.getItem('authToken')) {
+            window.location.href = '../login.html';
+            return;
+        }
+
+        const qty = parseInt(document.getElementById('cart-qty').value, 10) || 1;
+        btn.disabled = true;
+        msg.textContent = '';
+
+        try {
+            await addToCart(product.id, qty);
+            msg.textContent = 'Added to cart ✓';
+            msg.className = 'cart-success';
+        } catch (err) {
+            msg.textContent = err.message;
+            msg.className = 'error-box';
+        } finally {
+            btn.disabled = false;
+        }
+    });
 }
 
 async function loadProduct() {
@@ -66,8 +98,17 @@ async function loadProduct() {
                 ${colorsHtml ? `<div class="detail-attr"><strong>Colors:</strong> ${colorsHtml}</div>` : ''}
 
                 <p class="stock-note">${product.stock} units in stock</p>
+                <div class="cart-actions">
+                    <input type="number" id="cart-qty" value="1" min="1" max="${product.stock}">
+                    <button id="add-to-cart-btn" class="primary-btn" ${product.is_out_of_stock ? 'disabled' : ''}>
+                        Add to Cart
+                    </button>
+                    <p id="cart-message"></p>
+                </div>
             </div>
+
         `;
+        setupAddToCart(product);   // NEW: must run AFTER innerHTML creates the button
     } catch (err) {
         container.innerHTML = `<p class="error-box">Failed to load product: ${err.message}</p>`;
     }

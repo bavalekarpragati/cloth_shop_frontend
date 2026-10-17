@@ -1,0 +1,27 @@
+backend command:python manage.py runserver
+frontend command:python3 -m http.server 5500
+link:
+http://127.0.0.1:5500/index.html.
+
+Step 1: Start the frontend
+
+Open a terminal (the + in VS Code’s terminal panel) and run:
+
+bash
+cd ~/Documents/cloth_shop_frontend
+python3 -m http.server 5500
+
+You should see Serving HTTP on 0.0.0.0 port 5500. Leave this terminal open.
+
+Step 2: Check the backend is still running
+
+In your other terminal, you should see Starting development server at http://127.0.0.1:8000/. Your curl test worked a moment ago, so it was running then. If you closed it, start it again:
+
+bash
+cd ~/Documents/cloth_shop_backend
+source shop-backend/bin/activate
+python manage.py runserver
+
+Step 3: Reload the page
+
+Go back to the Chrome tab and click Reload, or open http://127.0.0.1:5500/index.html. Then press Ctrl + Shift + R for a hard refresh.
