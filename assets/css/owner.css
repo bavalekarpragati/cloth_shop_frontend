@@ -530,3 +530,20 @@ body:has(.owner-nav) {
     color: #8b92ad;
     font-size: 12px;
 }
+.import-card {
+    background: #1a1f33; border: 1px solid #2a3050; border-radius: 14px;
+    padding: 20px; margin-bottom: 24px; color: #e6e8f2;
+}
+.import-card h3 { margin: 0 0 4px; }
+.import-hint { margin: 0 0 14px; color: #8b92ad; font-size: 14px; }
+.import-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.import-row select, .import-row input[type="file"] {
+    padding: 9px 12px; background: #11152a; color: #e6e8f2;
+    border: 1px solid #2a3050; border-radius: 10px; font: inherit;
+}
+.import-summary { margin: 14px 0 0; font-weight: 600; }
+.import-summary .ok { color: #34d399; }
+.import-summary .bad, .import-summary.bad { color: #f87171; }
+.import-errors { margin-top: 10px; width: 100%; border-collapse: collapse; font-size: 14px; }
+.import-errors td { padding: 8px 10px; border-top: 1px solid #262c45; color: #e6e8f2; }
+.import-errors td:first-child { width: 90px; color: #8b92ad; }

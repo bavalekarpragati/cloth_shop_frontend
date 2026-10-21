@@ -47,6 +47,18 @@ async function deleteProductImage(productId, imageId) {
     });
 }
 
+async function importProducts(file, categoryId, imagesZip) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('category', categoryId);
+    if (imagesZip) formData.append('images_zip', imagesZip);
+    return await apiRequest('/products/import/', {
+        method: 'POST',
+        body: formData,
+        isFormData: true
+    });
+}
+
 export {
     getProducts,
     getProduct,
@@ -57,5 +69,6 @@ export {
     getSizes,
     getColors,
     uploadProductImages,
-    deleteProductImage
+    deleteProductImage,
+    importProducts
 };

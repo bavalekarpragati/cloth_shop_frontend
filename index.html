@@ -6,41 +6,43 @@
     <title>Vogue Harbor - Cloth Collection</title>
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/customer.css">
+    <link rel="stylesheet" href="assets/css/storefront.css">
 </head>
 <body>
     <nav class="customer-nav">
-        <div class="nav-brand">Vogue Harbor</div>
+        <div class="nav-brand"><a href="index.html" style="color:inherit; text-decoration:none;">Vogue Harbor</a></div>
         <div id="nav-auth"></div>
     </nav>
 
-    <main class="catalogue-main">
-        <aside class="filters-panel">
-            <h3>Filters</h3>
-            <label>Search</label>
-            <input type="text" id="f-search" placeholder="Saree, Kurti, Jeans...">
+    <!-- Horizontal category bar + subcategory chips -->
+    <div class="sf-catbar">
+        <div class="sf-tabs" id="category-tabs"></div>
+    </div>
+    <div class="sf-subrows" id="subcategory-rows"></div>
 
-            <label>Category</label>
-            <select id="f-category">
-                <option value="">All Categories</option>
-            </select>
+    <main class="sf-main">
+        <section class="sf-hero" id="hero">
+            <p class="sf-eyebrow">New season</p>
+            <h1>Styles for every occasion</h1>
+            <p>Sarees, kurtis, western wear and kidswear, all in one place.</p>
+        </section>
 
-            <label>Sort By</label>
+        <div class="sf-toolbar">
+            <input type="text" id="f-search" placeholder="Search saree, kurti, jeans...">
             <select id="f-ordering">
                 <option value="-created_at">Newest</option>
                 <option value="selling_price">Price: Low to High</option>
                 <option value="-selling_price">Price: High to Low</option>
             </select>
+            <button id="clear-filters" class="sf-ghost-btn">Clear</button>
+        </div>
 
-            <button id="apply-filters" class="primary-btn">Apply</button>
-            <button id="clear-filters">Clear All</button>
-        </aside>
+        <div class="sf-viewhead" id="view-head" hidden>
+            <h2 id="view-title"></h2>
+            <p id="results-count" class="sf-muted"></p>
+        </div>
 
-        <section class="product-grid-section">
-            <p id="results-count" class="muted"></p>
-            <div class="product-grid" id="product-grid">
-                <p>Loading products...</p>
-            </div>
-        </section>
+        <div id="store-content"><p class="sf-muted">Loading products...</p></div>
     </main>
 
     <script type="module" src="js/pages/home.js"></script>

@@ -1,6 +1,7 @@
 import { getProducts, createProduct, updateProduct, deleteProduct, getCategories, uploadProductImages, deleteProductImage } from '../api/products.js';
 import { logout } from '../api/auth.js';
 import { formatCurrency, requireOwner } from '../utils/dom.js';
+import { initProductImport } from '../utils/product-import.js';
 
 if (!requireOwner()) {
     throw new Error('Redirecting - not authorized');
@@ -198,6 +199,7 @@ productForm.addEventListener('submit', async (e) => {
 async function init() {
     await loadCategories();
     await loadProducts();
+    initProductImport(loadProducts);    // use the name of your function that reloads the product list
 }
 
 init();

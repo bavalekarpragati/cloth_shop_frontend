@@ -77,6 +77,19 @@
             </form>
         </div>
 
+        <section class="import-card">
+            <h3>Bulk import from CSV / Excel</h3>
+            <p class="import-hint">Choose a section, then upload a .csv or .xlsx file. All rows are added to that section.</p>
+            <div class="import-row">
+                <select id="import-category"></select>
+                <input type="file" id="import-file" accept=".csv,.xlsx">
+                <input type="file" id="import-images" accept=".zip" title="Optional: ZIP of product pictures">
+                <button id="import-btn" class="primary-btn" type="button">Import</button>
+                <button id="import-template" class="link-btn" type="button">Download template</button>
+            </div>
+            <div id="import-result"></div>
+        </section>
+
         <table class="data-table" id="products-table">
             <thead>
                 <tr>
